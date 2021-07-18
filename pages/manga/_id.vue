@@ -88,7 +88,7 @@ export default {
   async asyncData({ params, app }) {
     const locale = app.$cookies.get("locale");
     return {
-      url: `https://manga.art-creator.net/art/${params.id}`,
+      url: `https://manga.art-creator.net/manga/${params.id}`,
       image: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
       twitterImage: `https://nurie.s3-ap-northeast-1.amazonaws.com/ogpimg/${params.id}.jpg`,
       defaultLang: locale,
