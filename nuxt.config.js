@@ -45,12 +45,12 @@ export default {
       {
         hid: "og:image",
         property: "og:image",
-        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.jpg",
+        content: "https://yuilog.xyz/wp-content/uploads/2021/07/background.jpg",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image",
-        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.jpg",
+        content: "https://yuilog.xyz/wp-content/uploads/2021/07/background.jpg",
       },
       { name: "twitter:site", content: "@yui_active" },
     ],
@@ -58,7 +58,7 @@ export default {
       {
         rel: "icon",
         type: "image/x-icon",
-        href: "https://yuilog.xyz/wp-content/uploads/2021/06/favicon.png",
+        href: "https://yuilog.xyz/wp-content/uploads/2021/07/manga-favicon.jpg",
       },
     ],
   },

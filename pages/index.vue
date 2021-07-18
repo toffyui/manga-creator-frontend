@@ -348,7 +348,7 @@ export default {
       return `https://manga.art-creator.net/manga/${this.uuid}`;
     },
     twitterURL() {
-      const shareText = this.$t("漫画ツクールで素敵な漫画を作ったよ");
+      const shareText = this.$t("漫画ツクールで漫画を作ったよ");
       const hash = this.$t("#漫画ツクール");
       return (
         `https://twitter.com/intent/tweet?url=${this.url}&text=` +
@@ -356,7 +356,7 @@ export default {
       );
     },
     facebookURL() {
-      const shareText = this.$t("漫画ツクールで素敵な漫画を作ったよ");
+      const shareText = this.$t("漫画ツクールで漫画を作ったよ");
       const hash = this.$t("#漫画ツクール");
       return `https://www.facebook.com/sharer/sharer.php?u=${this.url}&t=${shareText}\n${hash}`;
     },
