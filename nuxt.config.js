@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { API_BASE_URL, API_OGP_URL } = process.env;
-// const userLanguage = window.navigator.language;
 
 export default {
   /*
@@ -46,12 +45,12 @@ export default {
       {
         hid: "og:image",
         property: "og:image",
-        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.png",
+        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.jpg",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:image",
-        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.png",
+        content: "https://yuilog.xyz/wp-content/uploads/2021/06/background.jpg",
       },
       { name: "twitter:site", content: "@yui_active" },
     ],

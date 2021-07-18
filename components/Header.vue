@@ -1,5 +1,5 @@
 <template>
-  <div class="sm:pt-20 bg-black bg-opacity-25">
+  <div class="sm:pt-20 bg-black bg-opacity-50">
     <div
       class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center lg:pt-0 pt-5"
     >
@@ -69,6 +69,6 @@
 
 <style>
 .textShadow {
-  text-shadow: #000 1px 0 5px;
+  text-shadow: #000 2px 2px 10px;
 }
 </style>

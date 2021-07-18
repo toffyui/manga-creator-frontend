@@ -147,7 +147,7 @@ export default {
   background: linear-gradient(90deg, #38382e 0%, #d97707 100%);
 }
 .background {
-  background-image: url("~/assets/img/background.png");
+  background-image: url("~/assets/img/background.jpg");
   background-repeat: repeat;
   background-size: 768px 432px;
 }

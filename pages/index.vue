@@ -16,7 +16,7 @@
             {{ $t("選択できる画像は40Mバイトまでです。") }}
           </p>
           <label
-            class="bg-yellow-600 cursor-pointer inline-flex items-center hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded-full"
+            class="bg-blue-600 cursor-pointer inline-flex items-center hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full"
           >
             <svg
               class="w-8 h-8"
@@ -46,12 +46,13 @@
             }}
           </p>
         </div>
-        <div class="w-full mt-3 sm:w-1/2 relative">
+        <div class="w-full mt-3 sm:w-1/2 relative" id="image-container">
           <img
             v-if="!uploadImageUrl"
             src="../assets/img/defaultPic.png"
             alt="default"
             class="border-double border-4 border-gray-600"
+            width="100%"
           />
           <img
             v-if="uploadImageUrl"
@@ -62,7 +63,7 @@
         </div>
       </div>
     </Section>
-    <Section title="画像のスタイルを選ぶ">
+    <Section title="背景画像を選ぶ">
       <p
         class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
         v-if="!uploadImageUrl && !changedImageUrl"
@@ -79,7 +80,8 @@
       >
         <div
           class="overflow-hidden rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
-          @click="getManga(back[1])"
+          :class="{ 'border-4 border-blue-600': selectedBack === back[1] }"
+          @click="selectedBack = back[1]"
         >
           <img
             :src="back[0]"
@@ -89,7 +91,7 @@
         </div>
       </div>
     </Section>
-    <Section title="画像のスタイルを選ぶ">
+    <Section title="画像の上に重ねる文字を選ぶ">
       <p
         class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
         v-if="!uploadImageUrl && !changedImageUrl"
@@ -106,7 +108,8 @@
       >
         <div
           class="overflow-hidden rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
-          @click="getManga(front[1])"
+          :class="{ 'border-4 border-blue-600': selectedFront === front[1] }"
+          @click="selectedFront = front[1]"
         >
           <img
             :src="front[0]"
@@ -116,12 +119,19 @@
         </div>
       </div>
     </Section>
-    <Section title="画像をシェア/保存">
-      <p
-        v-if="!uploadImageUrl && !changedImageUrl && !overlay"
-        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
+    <Section title="漫画化風画像を作る">
+      <div
+        v-if="uploadImageUrl"
+        class="cursor-pointer bg-blue-600 md:w-1/3 mx-auto w-full p-2 text-center rounded-full hover:bg-blue-400 font-bold text-lg text-white"
+        @click="getManga"
       >
-        {{ $t("先に漫画を作成してください") }}
+        {{ $t("画像を漫画化する") }}
+      </div>
+      <p
+        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
+        v-if="!uploadImageUrl && !changedImageUrl"
+      >
+        {{ $t("先に画像を選択してください") }}
       </p>
       <div class="w-full mx-auto">
         <Loaging v-if="overlay" />
@@ -201,7 +211,7 @@
         </div>
         <button
           @click="tweetButton"
-          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
+          class="text-center mx-auto bg-blue-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-blue-400"
         >
           {{ $t("ツイートする") }}
         </button>
@@ -230,7 +240,7 @@
         </div>
         <button
           @click="tweetButton"
-          class="text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-yellow-400"
+          class="text-center mx-auto bg-blue-600 text-white font-bold rounded-b py-4 w-full shadow-lg hover:bg-blue-400"
         >
           {{ $t("シェアする") }}
         </button>
@@ -302,6 +312,8 @@ export default {
         [Front4, 4],
         [Front5, 5],
       ],
+      selectedFront: 0,
+      selectedBack: 0,
     };
   },
   computed: {
@@ -309,7 +321,7 @@ export default {
       return 54;
     },
     url() {
-      return `https://manga.art-creator.net/art/${this.uuid}`;
+      return `https://manga.art-creator.net/manga/${this.uuid}`;
     },
     twitterURL() {
       const shareText = this.$t("漫画ツクールで素敵な漫画を作ったよ");
@@ -350,7 +362,7 @@ export default {
       this.uuid = this.generateUuid();
       await postImageData(this.uuid, this.imageData).then(() => {
         this.isFetched = true;
-        window.history.pushState(null, null, `/art/${this.uuid}`);
+        window.history.pushState(null, null, `/manga/${this.uuid}`);
       });
     },
     async OpenFBModal() {
@@ -358,7 +370,7 @@ export default {
       this.uuid = this.generateUuid();
       await postImageData(this.uuid, this.imageData).then(() => {
         this.isFetched = true;
-        window.history.pushState(null, null, `/art/${this.uuid}`);
+        window.history.pushState(null, null, `/manga/${this.uuid}`);
       });
     },
     CloseModal() {
@@ -390,15 +402,15 @@ export default {
       const [file] = e.target.files;
       const image = await this.checkImageSize(file);
       if (image) {
-        this.base64 = await resizeImage(image, 800, 800);
+        this.base64 = await resizeImage(image);
       }
       if (this.$refs.fileInput.value) {
         this.$refs.fileInput.value = "";
       }
     },
-    getManga(number) {
+    getManga() {
       if (this.base64) {
-        this.getResult(this.base64, number);
+        this.getResult(this.base64, this.selectedBack, this.selectedFront);
       }
     },
     generateUuid() {
@@ -426,10 +438,10 @@ export default {
         )
           ? ""
           : window.location.reload();
-        console.error(res.status_message);
+        console.error(res);
         return;
       }
-      this.imageData = res.result_img;
+      this.imageData = res.data.image;
       this.changedImageUrl = "data:image/png;base64," + this.imageData;
       this.overlay = false;
     },
@@ -438,10 +450,10 @@ export default {
 </script>
 <style>
 .gradient {
-  background: linear-gradient(90deg, #38382e 0%, #d97707 100%);
+  background: linear-gradient(90deg, #38382e 0%, #2463eb 100%);
 }
 .background {
-  background-image: url("~/assets/img/background.png");
+  background-image: url("~/assets/img/background.jpg");
   background-repeat: repeat;
   background-size: 768px 432px;
 }
