@@ -146,7 +146,7 @@
         {{ $t("画像を漫画化する") }}
       </div>
       <p
-        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
+        class="w-full text-center mt-3 text-gray-600 md:text-2xl text-base mb-3"
         v-if="!uploadImageUrl && !changedImageUrl"
       >
         {{ $t("先に画像を選択してください") }}
