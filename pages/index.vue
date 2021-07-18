@@ -15,6 +15,12 @@
           <p class="text-gray-600 mb-3 text-base">
             {{ $t("選択できる画像は40Mバイトまでです。") }}
           </p>
+          <p class="text-gray-600 text-base">
+            {{ $t("推奨は4:3程度の横長の画像です。") }}
+          </p>
+          <p class="text-gray-600 mb-3 text-base">
+            {{ $t("縦長の画像の場合はうまく変換できない可能性が高いです。") }}
+          </p>
           <label
             class="bg-blue-600 cursor-pointer inline-flex items-center hover:bg-blue-400 text-white font-bold py-2 px-4 rounded-full"
           >
@@ -49,7 +55,7 @@
         <div class="w-full mt-3 sm:w-1/2 relative" id="image-container">
           <img
             v-if="!uploadImageUrl"
-            src="../assets/img/defaultPic.png"
+            src="../assets/img/background.jpg"
             alt="default"
             class="border-double border-4 border-gray-600"
             width="100%"
@@ -63,57 +69,69 @@
         </div>
       </div>
     </Section>
-    <Section title="背景画像を選ぶ">
-      <p
-        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
-        v-if="!uploadImageUrl && !changedImageUrl"
-      >
-        {{ $t("先に画像を選択してください") }}
-      </p>
+    <Section title="背景エフェクトを選ぶ">
+      <div class="md:p-0 p-6 md:mb-3 w-full">
+        <p
+          class="w-full text-center mt-3 text-gray-600 md:text-2xl text-base"
+          v-if="!uploadImageUrl && !changedImageUrl"
+        >
+          {{ $t("先に画像を選択してください") }}
+        </p>
+        <p class="w-full text-center mt-3 text-gray-600 md:text-2xl text-base">
+          {{
+            $t(
+              "境界線のはっきりしていない画像の場合、うまく背景画像があたりません。"
+            )
+          }}
+        </p>
+      </div>
+
       <div
         v-for="back in backs"
         :key="back.id"
-        class="md:w-1/3 w-1/2 p-1 flex flex-col cursor-pointer"
+        class="md:w-1/3 w-1/2 p-1 cursor-pointer"
         :class="{
           'opacity-50 pointer-events-none': !uploadImageUrl || overlay,
         }"
       >
         <div
-          class="overflow-hidden rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
+          class="rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
           :class="{ 'border-4 border-blue-600': selectedBack === back[1] }"
           @click="selectedBack = back[1]"
         >
           <img
             :src="back[0]"
-            class="imageClass block w-full h-auto object-cover"
+            class="block w-full h-auto object-contain"
             alt="art"
           />
         </div>
       </div>
     </Section>
-    <Section title="画像の上に重ねる文字を選ぶ">
-      <p
-        class="w-full text-center mt-3 text-gray-600 text-2xl mb-3"
-        v-if="!uploadImageUrl && !changedImageUrl"
-      >
-        {{ $t("先に画像を選択してください") }}
-      </p>
+    <Section title="画像の上に重ねるエフェクトを選ぶ">
+      <div class="md:p-0 p-6 md:mb-3 w-full">
+        <p
+          class="w-full text-center mt-3 text-gray-600 md:text-2xl text-base"
+          v-if="!uploadImageUrl && !changedImageUrl"
+        >
+          {{ $t("先に画像を選択してください") }}
+        </p>
+      </div>
       <div
         v-for="front in fronts"
         :key="front.id"
-        class="md:w-1/3 w-1/2 p-1 flex flex-col cursor-pointer"
+        class="md:w-1/3 w-1/2 p-1 cursor-pointer"
         :class="{
           'opacity-50 pointer-events-none': !uploadImageUrl || overlay,
         }"
       >
         <div
-          class="overflow-hidden rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
+          class="rounded-lg shadow-lg transform transition hover:scale-105 duration-300 ease-in-out"
           :class="{ 'border-4 border-blue-600': selectedFront === front[1] }"
           @click="selectedFront = front[1]"
         >
           <img
             :src="front[0]"
-            class="imageClass block w-full h-auto object-cover"
+            class="block w-full h-auto object-contain"
             alt="art"
           />
         </div>
@@ -270,6 +288,9 @@ import Front2 from "~/assets/img/front_effects/2.png";
 import Front3 from "~/assets/img/front_effects/3.png";
 import Front4 from "~/assets/img/front_effects/4.png";
 import Front5 from "~/assets/img/front_effects/5.png";
+import Front6 from "~/assets/img/front_effects/6.png";
+import Front7 from "~/assets/img/front_effects/7.png";
+import Front8 from "~/assets/img/front_effects/8.png";
 export default {
   asyncData({ app }) {
     const locale = app.$cookies.get("locale");
@@ -311,6 +332,9 @@ export default {
         [Front3, 3],
         [Front4, 4],
         [Front5, 5],
+        [Front6, 6],
+        [Front7, 7],
+        [Front8, 8],
       ],
       selectedFront: 0,
       selectedBack: 0,
@@ -402,7 +426,7 @@ export default {
       const [file] = e.target.files;
       const image = await this.checkImageSize(file);
       if (image) {
-        this.base64 = await resizeImage(image);
+        this.base64 = await resizeImage(image, 1200, 1200);
       }
       if (this.$refs.fileInput.value) {
         this.$refs.fileInput.value = "";
@@ -456,10 +480,6 @@ export default {
   background-image: url("~/assets/img/background.jpg");
   background-repeat: repeat;
   background-size: 768px 432px;
-}
-
-.imageClass {
-  height: 200px;
 }
 .modalImageClass {
   max-height: 350px;
