@@ -72,7 +72,7 @@
         />
         <div class="flex items-center" @click="goTop">
           <div
-            class="cursor-pointer text-center mx-auto bg-yellow-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
+            class="cursor-pointer text-center mx-auto bg-blue-600 text-white font-bold rounded-b py-4 w-full shadow-lg"
           >
             {{ $t("漫画ツクールで漫画を作る") }}
           </div>
@@ -144,7 +144,7 @@ export default {
 </script>
 <style>
 .gradient {
-  background: linear-gradient(90deg, #38382e 0%, #d97707 100%);
+  background: linear-gradient(90deg, #38382e 0%, #000 100%);
 }
 .background {
   background-image: url("~/assets/img/background.jpg");

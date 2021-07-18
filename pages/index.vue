@@ -52,7 +52,7 @@
             }}
           </p>
         </div>
-        <div class="w-full mt-3 sm:w-1/2 relative" id="image-container">
+        <div class="w-full mt-3 sm:w-1/2 relative">
           <img
             v-if="!uploadImageUrl"
             src="../assets/img/background.jpg"
@@ -474,7 +474,7 @@ export default {
 </script>
 <style>
 .gradient {
-  background: linear-gradient(90deg, #38382e 0%, #2463eb 100%);
+  background: linear-gradient(90deg, #38382e 0%, #000 100%);
 }
 .background {
   background-image: url("~/assets/img/background.jpg");
