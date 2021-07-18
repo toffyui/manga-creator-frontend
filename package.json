@@ -1,0 +1,34 @@
+{
+  "name": "mangacreator",
+  "version": "1.0.0",
+  "description": "You can convert images with manga styles.",
+  "author": "YuikoIto",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@aceforth/nuxt-optimized-images": "^1.4.0",
+    "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/tailwindcss": "^4.0.2",
+    "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
+    "autoprefixer": "^9",
+    "cookie-universal-nuxt": "^2.1.5",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-svgo": "^9.0.0",
+    "nuxt": "^2.0.0",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vue-i18n": "^8.24.4"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^4.0.2",
+    "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
+    "nodemon": "^2.0.7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  }
+}
