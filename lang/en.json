@@ -37,7 +37,7 @@
   "作成された漫画": "Created Manga",
   "漫画ツクールで漫画を作る": "Let's make a new manga with MangaCreator!",
   "オリジナル漫画を作ろう": "Get an original Manga with your picture.",
-  "推奨は4:3程度の横長の画像です。": "Recommended is a horizontal image of about 4:3.",
+  "推奨は3:2程度の横長の画像です。": "Recommended is a horizontal image of about 3:2.",
   "縦長の画像の場合はうまく変換できない可能性が高いです。": "If the image is vertical, there is a good chance that it will not convert well.",
   "境界線のはっきりしていない画像の場合、うまく背景画像があたりません。": "If the image does not have a clear border, it will not hit the background image properly."
 }
