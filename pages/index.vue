@@ -137,7 +137,7 @@
         </div>
       </div>
     </Section>
-    <Section title="漫画化風画像を作る">
+    <Section title="漫画風画像を作る">
       <div
         v-if="uploadImageUrl"
         class="cursor-pointer bg-blue-600 md:w-1/3 mx-auto w-full p-2 text-center rounded-full hover:bg-blue-400 font-bold text-lg text-white"
