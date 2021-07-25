@@ -291,6 +291,9 @@ import Front5 from "~/assets/img/front_effects/5.png";
 import Front6 from "~/assets/img/front_effects/6.png";
 import Front7 from "~/assets/img/front_effects/7.png";
 import Front8 from "~/assets/img/front_effects/8.png";
+import Front9 from "~/assets/img/front_effects/9.png";
+import Front10 from "~/assets/img/front_effects/10.png";
+import Front11 from "~/assets/img/front_effects/11.png";
 export default {
   asyncData({ app }) {
     const locale = app.$cookies.get("locale");
@@ -335,6 +338,9 @@ export default {
         [Front6, 6],
         [Front7, 7],
         [Front8, 8],
+        [Front9, 9],
+        [Front10, 10],
+        [Front11, 11],
       ],
       selectedFront: 0,
       selectedBack: 0,
